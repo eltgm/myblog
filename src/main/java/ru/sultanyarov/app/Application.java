@@ -1,22 +1,14 @@
 package ru.sultanyarov.app;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import org.bson.types.ObjectId;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.io.IOException;
-import java.util.List;
 
 @EnableWebMvc
 @SpringBootApplication
@@ -27,21 +19,13 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Bean
-    protected WebMvcConfigurer webMvcConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-                Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
-                builder.serializerByType(ObjectId.class, new JsonSerializer<ObjectId>() {
-                    @Override
-                    public void serialize(ObjectId value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-                        gen.writeString(value.toString());
-                    }
-                });
+    @Bean(name = "threadPoolExecutor")
+    @Primary
+    public AsyncTaskExecutor getAsyncExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(200);
+        executor.setThreadNamePrefix("Async-");
 
-                converters.add(new MappingJackson2HttpMessageConverter(builder.build()));
-            }
-        };
+        return executor;
     }
 }

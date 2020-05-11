@@ -3,29 +3,27 @@ package ru.sultanyarov.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.sultanyarov.models.BlogPost;
+import ru.sultanyarov.IndexService;
 
-import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
+import java.util.concurrent.Callable;
 
 @Controller
 public class IndexController {
+    private final IndexService indexService;
+    String pattern = "d MMMM yyyy";
+
+    public IndexController(IndexService indexService) {
+        this.indexService = indexService;
+    }
 
     @GetMapping(value = {"/", "/index"})
-    public String moveToIndex(Model model) {
-        String pattern = "d MMMM yyyy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-
-        final var build = BlogPost.builder()
-                .postAuthor("Владислав Султаняров")
-                .postDate(simpleDateFormat.format(new Date()))
-                .postDescription("Краткая часть поста")
-                .postTitle("Название поста")
-                .build();
-
-        model.addAttribute("posts", Collections.singleton(build));
-        return "index";
+    public Callable<String> moveToIndex(Model model) {
+        return () -> indexService.getAllPosts()
+                .thenApply(blogPosts -> {
+                    model.addAttribute("posts", blogPosts);
+                    return "index";
+                })
+                .get();
     }
 
     @GetMapping("/about")

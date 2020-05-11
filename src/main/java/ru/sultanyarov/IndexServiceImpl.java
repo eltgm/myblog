@@ -19,7 +19,6 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public CompletableFuture<List<BlogPost>> getAllPosts() {
-        final var all = blogPostRepository.findAll();
-        return CompletableFuture.completedFuture(all);
+        return CompletableFuture.completedFuture(blogPostRepository.findAll());
     }
 }

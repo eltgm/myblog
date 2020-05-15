@@ -164,29 +164,29 @@
 	   
        /* Load More Post */	
 	   	
-        $("div.blog-post").slice(0, 4).show();
-          $("#load-more-post").on('click', function (e) {
-             e.preventDefault();
-             $("div.blog-post:hidden").slice(0, 1).slideDown(300);
-             if ($("div.blog-post:hidden").length == 0) {
-             $('#post-end-message').html('<div class="end">End</div>').fadeIn(800);
-             $("#load-more-post").fadeOut(100);
-              }
-             });
+        $("div.blog-post").slice(0, 5).show();
+        $("#load-more-post").on('click', function (e) {
+            e.preventDefault();
+            $("div.blog-post:hidden").slice(0, 5).slideDown(300);
+            if ($("div.blog-post:hidden").length == 0) {
+                $('#post-end-message').html('<div class="end">Конец</div>').fadeIn(800);
+                $("#load-more-post").fadeOut(100);
+            }
+        });
 			 
 
 
-       /* Load More Portfolio */	
-	   	
-        $("div.portfolio").slice(0, 2).show();
-          $("#load-more-portfolio").on('click', function (e) {
-             e.preventDefault();
-             $("div.portfolio:hidden").slice(0, 1).slideDown(300);
-             if ($("div.portfolio:hidden").length == 0) {
-             $('#portfolio-end-message').html('<div class="end">End</div>').fadeIn(800);
-             $("#load-more-portfolio").fadeOut(100);
-              }
-             });
+       /* Load More Portfolio */
+
+        $("div.portfolio").slice(0, 5).show();
+        $("#load-more-portfolio").on('click', function (e) {
+            e.preventDefault();
+            $("div.portfolio:hidden").slice(0, 5).slideDown(300);
+            if ($("div.portfolio:hidden").length == 0) {
+                $('#portfolio-end-message').html('<div class="end">Конец</div>').fadeIn(800);
+                $("#load-more-portfolio").fadeOut(100);
+            }
+        });
 			 
 		
 		

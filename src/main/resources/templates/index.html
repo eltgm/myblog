@@ -115,9 +115,8 @@
                                     <img th:src="${post.getPostImage()}" alt="">
                                 </div>
                                 <div class="post-title">
-                                    <a href="single.html"><h1 th:text="${post.getPostTitle()}">Make mailchimp singup
-                                        form working with ajax using jquery
-                                        plugin</h1></a>
+                                    <a th:href="@{'/single?id=' + ${post.getId().toString()}}"><h1
+                                            th:text="${post.getPostTitle()}"></h1></a>
                                 </div>
                                 <div class="post-info">
                                     <span th:text="${post.getPostDate()} + ' от ' + ${post.getPostAuthor()}"></span>
@@ -127,7 +126,7 @@
                                     similique temporibus tempora dicta soluta? Qui hic, voluptatem nemo quo corporis
                                     dignissimos voluptatum debitis cumque fugiat mollitia quasi quod. Lorem ipsum dolor
                                     sit amet, consectetur adipisicing elit. Molestiae ut ratione similique.</p>
-                                <a href="single.html"
+                                <a th:href="@{'/single?id=' + ${post.getId().toString()}}"
                                    class="button button-style button-anim fa fa-long-arrow-right"><span>Читать далее</span></a>
                             </div>
                             <!-- Blog Post End -->

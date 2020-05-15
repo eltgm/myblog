@@ -3,22 +3,21 @@ package ru.sultanyarov.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.sultanyarov.IndexService;
+import ru.sultanyarov.service.PostService;
 
 import java.util.concurrent.Callable;
 
 @Controller
 public class IndexController {
-    private final IndexService indexService;
-    String pattern = "d MMMM yyyy";
+    private final PostService postService;
 
-    public IndexController(IndexService indexService) {
-        this.indexService = indexService;
+    public IndexController(PostService postService) {
+        this.postService = postService;
     }
 
     @GetMapping(value = {"/", "/index"})
     public Callable<String> moveToIndex(Model model) {
-        return () -> indexService.getAllPosts()
+        return () -> postService.getAllPosts()
                 .thenApply(blogPosts -> {
                     model.addAttribute("posts", blogPosts);
                     return "index";

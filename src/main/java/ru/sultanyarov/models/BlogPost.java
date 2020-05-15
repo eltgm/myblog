@@ -4,14 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 @Document("blog_posts")
 public class BlogPost {
+    @Id
+    private String id;
     private String postTitle;
     private String postImage;
     private String postDate;

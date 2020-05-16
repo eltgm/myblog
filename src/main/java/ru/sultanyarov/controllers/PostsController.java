@@ -35,7 +35,9 @@ public class PostsController {
             var simpleDateFormat = new SimpleDateFormat(pattern);
             blogPost.setPostDate(simpleDateFormat.format(new Date()));
 
-            return () -> postService.savePost(blogPost).thenApply(blogPost1 -> new RedirectView("/")).get();
+            return () -> postService.savePost(blogPost)
+                    .thenApply(blogPost1 -> new RedirectView("/"))
+                    .get();
         } else {
             return () -> new RedirectView("/");
         }

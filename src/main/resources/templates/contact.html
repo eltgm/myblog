@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- Meta Tag -->
@@ -130,58 +130,59 @@
                                     <div class="col-md-12">
 
                                         <div class="row">
-                                            <form>
+                                            <form action="#" method="post" th:action="@{/send_email}"
+                                                  th:object="${email}">
 
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <input type="text" id="name" class="form-control"
-                                                               placeholder="Ваше имя">
+                                                               placeholder="Ваше имя" th:field="*{name}">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <input type="email" id="email" class="form-control"
-                                                               placeholder="Ваша почта">
+                                                               placeholder="Ваша почта" th:field="*{senderMail}">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <input type="text" id="website" class="form-control"
-                                                               placeholder="Ваш сайт(если есть)">
+                                                               placeholder="Ваш сайт(если есть)"
+                                                               th:field="*{senderUrl}">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <input type="text" id="address" class="form-control"
-                                                               placeholder="Откуда Вы?">
+                                                               placeholder="Откуда Вы?" th:field="*{home}">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-12">
-                                                    <select id="subject" class="form-group form-control">
+                                                    <select class="form-group form-control" id="subject"
+                                                            th:field="*{subject}">
                                                         <option value="" selected disabled>Тема</option>
-                                                        <option>Разработка</option>
-                                                        <option>Спорт</option>
-                                                        <option>Консоли</option>
-                                                        <option>Настолки</option>
-                                                        <option>Разное</option>
+                                                        <option th:value="'Разработка'">Разработка</option>
+                                                        <option th:value="'Спорт'">Спорт</option>
+                                                        <option th:value="'Консоли'">Консоли</option>
+                                                        <option th:value="'Настолки'">Настолки</option>
+                                                        <option th:value="'Разное'">Разное</option>
                                                     </select>
                                                 </div>
 
                                                 <div class="col-sm-12">
                                                     <div class="textarea-message form-group">
                                                         <textarea id="message" class="textarea-message form-control"
-                                                                  placeholder="Ваше сообщение" rows="5"></textarea>
+                                                                  placeholder="Ваше сообщение" rows="5"
+                                                                  th:field="*{message}"></textarea>
                                                     </div>
                                                 </div>
 
-
-                                                <div class="text-center">
-                                                    <button type="submit" class="load-more-button">Шлём</button>
-                                                </div>
+                                                <input class="load-more-button" type="submit" value="Шлём">
 
                                             </form>
                                         </div>

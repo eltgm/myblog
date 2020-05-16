@@ -27,7 +27,8 @@ target
 hs_err_pid*
 #.gradle
 /build/
-
+/src/main/resources/.github
+/src/main/resources/.gitlab
 # Ignore Gradle GUI config
 gradle-app.setting
 

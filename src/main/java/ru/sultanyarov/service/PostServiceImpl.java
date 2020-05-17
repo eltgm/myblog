@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.sultanyarov.models.BlogPost;
 import ru.sultanyarov.repositories.BlogPostRepository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -21,7 +22,9 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public CompletableFuture<List<BlogPost>> getAllPosts() {
-        return CompletableFuture.completedFuture(blogPostRepository.findAll());
+        var all = blogPostRepository.findAll();
+        Collections.reverse(all);
+        return CompletableFuture.completedFuture(all);
     }
 
     @Override

@@ -3,6 +3,7 @@ package ru.sultanyarov.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ru.sultanyarov.models.User;
 import ru.sultanyarov.service.PostService;
 
 import java.util.concurrent.Callable;
@@ -20,6 +21,7 @@ public class IndexController {
         return () -> postService.getAllPosts()
                 .thenApply(blogPosts -> {
                     model.addAttribute("posts", blogPosts);
+                    model.addAttribute("user", new User());
                     return "index";
                 })
                 .get();

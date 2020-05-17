@@ -115,7 +115,8 @@ button {
 
 .page-body {
     background: #ffffff;
-    box-shadow: -2px -1px 88px 0px rgba(0,0,0,0.17);
+    box-shadow: -2px -1px 88px 0px rgba(0, 0, 0, 0.17);
+    margin-left: 15px;
 }
 
 .sub-title {
@@ -278,7 +279,7 @@ button {
 
 .menu {
     position: absolute;
-    right: 10px;
+    right: 0px;
     top: 0px;
     font-size: 20px;
     color: #fff;
@@ -326,7 +327,7 @@ button {
 
 .about-fixed {
     position: fixed;
-    width: 19.8%;
+    width: 19.2%;
 }
 
 .my-pic {

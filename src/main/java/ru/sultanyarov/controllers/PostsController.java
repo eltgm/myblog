@@ -43,7 +43,7 @@ public class PostsController {
         final var fullName = userOptional.orElse(ru.sultanyarov.models.User.builder()
                 .fullName("Пользователь Неизвестен")
                 .build()).getFullName();
-        if (blogPost != null) {
+        if (!blogPost.getPostFullText().isEmpty()) {
             var pattern = "d MMMM yyyy";
             var simpleDateFormat = new SimpleDateFormat(pattern);
             blogPost.setPostDate(simpleDateFormat.format(new Date()));
